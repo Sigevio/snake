@@ -4,7 +4,7 @@ import random as rnd
 import sqlite3
 
 class Game:
-    def __init__(self, cell_width: int, cell_height: int, board_start: int, board_end: int, number_of_cells_x: int, number_of_cells_y: int, snake: object) -> None:
+    def __init__(self, cell_width: int, cell_height: int, board_start: int, board_end: int, number_of_cells_x: int, number_of_cells_y: int, snake: object, has_started = False) -> None:
         self.cell_width = cell_width
         self.cell_height = cell_height
         self.board_start = board_start
@@ -12,6 +12,7 @@ class Game:
         self.number_of_cells_x = number_of_cells_x
         self.number_of_cells_y = number_of_cells_y
 
+        self.has_started = has_started
         self.game_over = False
 
         self.snake = snake
@@ -92,6 +93,13 @@ class Game:
         # Draw game over
         if self.game_over:
             self.draw_game_over(screen)
+        
+        # Draw start screen
+        if not self.has_started:
+            start_text = font.render('Press SPACE to start', True, black, snake_body_color)
+            start_text_rectangle = start_text.get_rect()
+            start_text_rectangle.center = (int(self.cell_width * 12), self.board_end + int(self.cell_height * 3))
+            screen.blit(start_text, start_text_rectangle)
 
     def draw_game_over(self, screen):
         font = pygame.font.Font('freesansbold.ttf', 28)
@@ -100,7 +108,7 @@ class Game:
         game_over_text_rectangle.center = (int(self.cell_width * 12), self.board_end + int(self.cell_height * 2.5))
         screen.blit(game_over_text, game_over_text_rectangle)
 
-        restart_text = font.render('Press ENTER to restart', True, black, apple_color)
+        restart_text = font.render('Press SPACE to restart', True, black, apple_color)
         restart_text_rectangle = restart_text.get_rect()
         restart_text_rectangle.center = (int(self.cell_width * 12), self.board_end + int(self.cell_height * 3.5))
         screen.blit(restart_text, restart_text_rectangle)

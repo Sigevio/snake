@@ -10,18 +10,19 @@ if __name__ == '__main__':
     number_of_cells_x = 15
     number_of_cells_y = 15
 
+    snake = Snake(number_of_cells_x // 2, 0)
+    game = Game(cell_width, cell_height, board_start, board_end, number_of_cells_x, number_of_cells_y, snake)
+
+    pygame.init()
+    screen = pygame.display.set_mode((680, 800))
+    clock = pygame.time.Clock()
+    pygame.display.set_caption('Snake')
+
+    game.draw_board(screen)
+    pygame.display.update()
+
     def main():
-        snake = Snake(number_of_cells_x // 2, 0)
-        game = Game(cell_width, cell_height, board_start, board_end, number_of_cells_x, number_of_cells_y, snake)
-
-        pygame.init()
-        screen = pygame.display.set_mode((680, 800))
-        clock = pygame.time.Clock()
-        pygame.display.set_caption('Snake')
-
-        game.draw_board(screen)
-
-        while True:
+        while game.has_started:
             can_change_direction = True
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -43,11 +44,21 @@ if __name__ == '__main__':
             pygame.display.update()
             clock.tick(8)
 
-    main()
-
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                main()
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                if not game.has_started:
+                    game.has_started = True
+                    main()
+                else:
+                    snake = Snake(number_of_cells_x // 2, 0)
+                    game = Game(cell_width, cell_height, board_start, board_end, number_of_cells_x, number_of_cells_y, snake, True)
+
+                    pygame.init()
+
+                    game.draw_board(screen)
+                    pygame.display.update()
+
+                    main()
