@@ -52,6 +52,12 @@ class Game:
                 else:
                     pygame.draw.rect(screen, board2_color, [x, y, self.cell_width, self.cell_height])
         
+        # Draw border
+        pygame.draw.line(screen, black, (self.board_start - 2, self.board_start - 2), (self.board_end + self.cell_width + 1, self.board_start - 2), 2)
+        pygame.draw.line(screen, black, (self.board_start - 2, self.board_end + self.cell_height), (self.board_end + self.cell_width + 1, self.board_end + self.cell_height), 2)
+        pygame.draw.line(screen, black, (self.board_start - 2, self.board_start - 2), (self.board_start - 2, self.board_end + self.cell_height), 2)
+        pygame.draw.line(screen, black, (self.board_end + self.cell_width, self.board_start), (self.board_end + self.cell_width, self.board_end + self.cell_height), 2)
+        
         # Draw snake
         pygame.draw.rect(screen, snake_head_color, [self.calculate_x_on_board(self.snake.head.x), self.calculate_y_on_board(self.snake.head.y), self.cell_width, self.cell_height])
         for body_part in self.snake.body:
