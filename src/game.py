@@ -89,6 +89,18 @@ class Game:
         highscore_text_rectangle.center = (int(self.cell_width * 3.5), self.board_end + int(self.cell_height * 3.5))
         screen.blit(highscore_text, highscore_text_rectangle)
 
+        # Draw game over
+        if self.game_over:
+            game_over_text = font.render('Game over!', True, black, apple_color)
+            game_over_text_rectangle = game_over_text.get_rect()
+            game_over_text_rectangle.center = (int(self.cell_width * 12), self.board_end + int(self.cell_height * 2.5))
+            screen.blit(game_over_text, game_over_text_rectangle)
+
+            restart_text = font.render('Press ENTER to restart', True, black, apple_color)
+            restart_text_rectangle = restart_text.get_rect()
+            restart_text_rectangle.center = (int(self.cell_width * 12), self.board_end + int(self.cell_height * 3.5))
+            screen.blit(restart_text, restart_text_rectangle)
+
     def tick(self):
         self.apple_eaten = self.snake.move(self.apple_x, self.apple_y)
         self.score = self.snake.get_length() - 1
