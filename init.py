@@ -36,7 +36,7 @@ if __name__ == '__main__':
                     elif event.key == pygame.K_DOWN and game.snake.direction != 'up':
                         game.snake.direction = 'down'
                     can_change_direction = False
-            game.tick()
+            game.tick(screen)
             if game.game_over:
                 break
             game.draw_board(screen)
