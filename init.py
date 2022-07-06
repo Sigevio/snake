@@ -1,3 +1,4 @@
+import sys
 import pygame
 from src.snake import Snake
 from src.game import Game
@@ -22,11 +23,12 @@ if __name__ == '__main__':
     pygame.display.update()
 
     def main():
-        while game.has_started:
+        while True:
             can_change_direction = True
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+                    sys.exit()
                 elif event.type == pygame.KEYDOWN and can_change_direction:
                     if event.key == pygame.K_LEFT and game.snake.direction != 'right':
                         game.snake.direction = 'left'
@@ -48,6 +50,7 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 if not game.has_started:
                     game.has_started = True
