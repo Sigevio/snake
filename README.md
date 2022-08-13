@@ -1,9 +1,8 @@
 ## About the project
 
-A PyGame demo project. Highscores are saved in a SQLite database.
+A PyGame project. Highscores are saved in a txt-file.
 
 ### Built with
 
 * Python
   * PyGame
-* SQLite
