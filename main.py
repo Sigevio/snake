@@ -1,7 +1,7 @@
 import sys
 import pygame
 
-from src.constants import BACKGROUND_COLOR, BLACK_COLOR, CELL_SIZE, GRASS_COLOR, SCREEN_HEIGHT, SCREEN_WIDTH
+from src.constants import BACKGROUND_COLOR, BLACK_COLOR, CELL_SIZE, GRASS_COLOR, SCREEN_HEIGHT, SCREEN_UPDATE, SCREEN_WIDTH
 from src.menu_controller import MenuController
 from src.game_controller import GameController
 
@@ -10,6 +10,7 @@ class Main:
         pygame.init()
         pygame.display.set_caption('Snake')
         pygame.mouse.set_cursor(pygame.cursors.tri_left)
+        pygame.time.set_timer(SCREEN_UPDATE, 150)
 
         self.main_surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.menu_controller = MenuController(self.main_surface)
@@ -20,7 +21,7 @@ class Main:
     def start_loop(self) -> None:
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                if (event.type == pygame.QUIT) or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                     pygame.quit()
                     sys.exit()
                 self.update(event)

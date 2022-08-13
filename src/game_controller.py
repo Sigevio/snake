@@ -7,10 +7,7 @@ from src.snake import Snake
 
 class GameController:
 	def __init__(self, main_surface:pygame.Surface, game_over:any, snake_color:tuple, cell_number:int) -> None:
-		pygame.time.set_timer(SCREEN_UPDATE, 150)
-
 		self.game_over = game_over
-
 		self.cell_number = cell_number
 		
 		if cell_number == 20:
